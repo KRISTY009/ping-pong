@@ -27,34 +27,43 @@ class Player(GameSprite):
         keys_pressed = key.get_pressed()
         if keys_pressed[K_UP] and self.rect.y != 0:
             self.rect.y -= 5
-        if keys_pressed[K_DOWN] and self.rect.y != 410:
+        if keys_pressed[K_DOWN] and self.rect.y != 400:
             self.rect.y += 5
     def update_l(self):
         keys_pressed = key.get_pressed()
         if keys_pressed[K_w] and self.rect.y != 0:
             self.rect.y -= 5
-        if keys_pressed[K_s] and self.rect.y != 410:
+        if keys_pressed[K_s] and self.rect.y != 400:
             self.rect.y += 5
 
-# class Ball(GameSprite):
-#     def __init__(self, player_image, player_speed, coor_x, coor_y, size_x, size_y):
-#         super().__init__(player_image, player_speed, coor_x, coor_y, size_x, size_y)
-#     def update(self):
-#         if self.rect.x >= 600 or sprite.collide_rect(self, player_2) and self.rect.x > 0:
-#             self.size = 'left'
-#         if self.rect.x <= 0 or sprite.collide_rect(self, player_1) and self.rect.x < 600:
-#             self.size = 'right'
-#         if self.rect.y <= 0:
-
-#         if self.rect.y >= 600:
-#             self.rect.y -= self.speed
-
-#             self.rect.y += self.speed
-#             self.rect.x -= self.speed
-#             self.rect.x += self.speed
+class Ball(GameSprite):
+    def __init__(self, player_image, player_speed, coor_x, coor_y, size_x, size_y):
+        super().__init__(player_image, player_speed, coor_x, coor_y, size_x, size_y)
+        self.size = 'down'
+    def update(self):
+        if self.rect.x >= 600 or sprite.collide_rect(self, player_2):
+            self.size = 'left'
+        if self.rect.x <= 0 or sprite.collide_rect(self, player_1):
+            self.size = 'right'
+        if self.rect.y <= 0:
+            self.size = 'down'
+        if self.rect.y >= 400:
+            self.size = 'up'
+        if self.size == 'down':
+            self.rect.y += self.speed
+            self.rect.x -= self.speed
+        if self.size == 'up':
+            self.rect.y -= self.speed
+            self.rect.x -= self.speed
+        if self.size == 'right':
+            self.rect.y += self.speed
+            self.rect.x += self.speed
+        if self.size == 'left':
+            self.rect.y += self.speed
+            self.rect.x -= self.speed
 player_1 = Player('player_1.png', 3, 10, 0, 90, 110)
 player_2 = Player('player_2.png', 3, 600, 0, 90, 110)
-# ball = Ball('ball.png', 3, 250, 250, 50, 50)
+ball = Ball('ball.png', 3, 200, 100, 50, 50)
 
 
 finish = False
@@ -69,12 +78,12 @@ while game:
         player_1.update_l()
         player_2.reset()
         player_2.update_r()
-        # ball.reset()
-        # ball.update()
-        # if ball.rect.x >= 600 or sprite.collide_rect(ball, player_2):
-        #     ball.rect.x -= ball.speed
-        # if ball.rect.x <= 0 or sprite.collide_rect(ball, player_1):
-        #     ball.rect.x += ball.speed
+        ball.reset()
+        ball.update()
+        # if ball.rect.x >= 600:
+        #     finish = True
+        # if ball.rect.x <= 0:
+        #     finish = True
         
     display.update()
     clock.tick(60)
