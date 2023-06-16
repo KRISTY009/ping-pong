@@ -7,7 +7,7 @@ display.set_caption('Ping-Pong')
 background = transform.scale(image.load('image.jpg'), (700, 500))
 font1 = font.Font(None, 70)
 font2 = font.Font(None, 25)
-class GameSprite(sprite.Sprite):
+class GameSprite(sprite.Sprite): 
     def __init__(self, player_image, player_speed, coor_x, coor_y, size_x, size_y):
         super().__init__()
         self.width = size_x
