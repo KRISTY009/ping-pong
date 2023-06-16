@@ -96,15 +96,12 @@ player_1 = Player('player_1.png', 3, 10, 0, 90, 110)
 player_2 = Player('player_2.png', 3, 600, 0, 90, 110)
 ball = Ball('ball.png', 2, 200, 100, 50, 50)
 
-amount_1 = font2.render('Счёт первого игрока:  ' + str(ball.amount1), True, (255,255,255))
-amount_2 = font2.render('Счёт второго игрока:  ' + str(ball.amount2), True, (255,255,255))
-
 win_1 = font1.render('Победил игрок 1', True, (255,255,255))
 win_2 = font1.render('Победил игрок 2', True, (255,255,255))
 
 lose = font1.render('Игра окончена!', True, (0,0,0))
 total = font1.render('СЧЁТ', True, (255,255,255))
-total_n = font1.render(str(ball.amount1) + '/' + str(ball.amount2), True, (255,255,255))
+
 
 finish = False
 game = True
@@ -113,6 +110,9 @@ while game:
         if e.type == QUIT:
             game = False
     if finish != True:
+        amount_1 = font2.render('Счёт первого игрока:  ' + str(ball.amount1), True, (255,255,255))
+        amount_2 = font2.render('Счёт второго игрока:  ' + str(ball.amount2), True, (255,255,255))
+        total_n = font1.render(str(ball.amount1) + '/' + str(ball.amount2), True, (255,255,255))
         window.blit(background, (0, 0))
         player_1.reset()
         player_1.update_l()
